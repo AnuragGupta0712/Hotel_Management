@@ -19,6 +19,9 @@ Map<String, Hotel> hotelMap = new HashMap<>();
 @Autowired
     RatingServiceCommunicator ratingServiceCommunicator;
     public void createHotel(Hotel hotel) {
+        if(hotelMap.containsKey(hotel.getId())) {
+            throw new BadRequestException("Hotel with id " + hotel.getId() + " already exists");
+        }
         Map<String,Long> ratingsMap = new HashMap<>();
         hotelList.add(hotel);
         hotelMap.put(hotel.getId() , hotel);
